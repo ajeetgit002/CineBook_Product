@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RedisConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/RefreshTokenRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/entity/RefreshToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/repository/RefreshTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/RateLimitFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/RefreshTokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/SeatLockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/AuthController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +179,7 @@
       <workItem from="1780326819871" duration="961000" />
       <workItem from="1780327849967" duration="3223000" />
       <workItem from="1780331139032" duration="2145000" />
-      <workItem from="1780333355031" duration="13399000" />
+      <workItem from="1780333355031" duration="13569000" />
     </task>
     <servers />
   </component>

@@ -26,10 +26,17 @@ public class AuthController {
         return ApiResponse.success("Login successful", authService.login(request));
     }
 
+
     @PostMapping("/logout")
-    public ApiResponse<String> logout() {
-        return ApiResponse.success("Logout successful", authService.logout());
+    public ApiResponse<String> logout(
+            @RequestBody TokenRefreshRequest request) {
+
+        return ApiResponse.success(
+                "Logout successful",
+                authService.logout(request.refreshToken())
+        );
     }
+
 
     @PostMapping("/refresh-token")
     public ApiResponse<AuthResponse> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
