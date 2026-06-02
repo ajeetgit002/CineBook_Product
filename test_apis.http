@@ -1,0 +1,188 @@
+### CineBook API Testing - IntelliJ HTTP Client
+### Use this file with IntelliJ IDEA's built-in REST Client (Ctrl+Alt+Shift+R)
+
+@baseUrl = http://localhost:9099
+@adminEmail = admin@example.com
+@adminPassword = admin123
+
+### ===================================================
+### 1. LOGIN - Get Authentication Token
+### ===================================================
+### Description: Login with admin credentials to get a JWT token
+### Expected: 200 OK with token
+### Logs to check: [JwtService] Token generated successfully
+
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+> {%
+    // Automatically capture token for next requests
+    if (response.status === 200) {
+        const responseBody = response.body;
+        client.global.set("token", responseBody.data.token);
+        client.global.set("auth_header", "Bearer " + responseBody.data.token);
+    }
+%}
+
+### ===================================================
+### 2. TEST PUBLIC ENDPOINT - No Authentication Needed
+### ===================================================
+### Description: Get movies list (public endpoint)
+### Expected: 200 OK
+### Logs to check: [JWT Filter] No Bearer token found... [permitAll()]
+
+GET {{baseUrl}}/api/movies
+
+### ===================================================
+### 3. TEST PROTECTED ENDPOINT - WITHOUT Token (Should Fail)
+### ===================================================
+### Description: Try to get bookings without authentication
+### Expected: 403 Forbidden
+### Logs to check: [JWT Filter] No Bearer token found for path: /api/bookings/my
+###               [Exception] 403 Forbidden - Path: /api/bookings/my
+
+GET {{baseUrl}}/api/bookings/my
+
+> {%
+    if (response.status !== 403) {
+        console.log("WARNING: Expected 403 but got " + response.status);
+    } else {
+        console.log("✓ Got expected 403 error - Check logs!");
+    }
+%}
+
+### ===================================================
+### 4. TEST PROTECTED ENDPOINT - WITH Valid Token (Should Work)
+### ===================================================
+### Description: Get bookings with valid authentication
+### Expected: 200 OK
+### Logs to check: [JWT Filter] Successfully authenticated user: admin@example.com
+###               [UserDetailsService] User authorities: [ROLE_ADMIN]
+
+GET {{baseUrl}}/api/bookings/my
+Authorization: {{auth_header}}
+
+> {%
+    if (response.status === 200) {
+        console.log("✓ Authentication successful!");
+        console.log("Response time: " + response.headers.value("content-length") + " bytes");
+    } else if (response.status === 401 || response.status === 403) {
+        console.log("⚠ Authentication failed - Check logs!");
+        console.log("Status: " + response.status);
+  }
+%}
+
+### ===================================================
+### 5. TEST INVALID TOKEN (Should Fail)
+### ===================================================
+### Description: Try with malformed JWT token
+### Expected: 401 Unauthorized or 403 Forbidden
+### Logs to check: [JwtService] Error extracting username from token
+###               [JWT Filter] Authentication error
+
+GET {{baseUrl}}/api/bookings/my
+Authorization: Bearer invalid.token.here
+
+> {%
+    if (response.status === 401 || response.status === 403) {
+        console.log("✓ Invalid token rejected correctly");
+    } else {
+        console.log("⚠ Expected 401/403 but got " + response.status);
+    }
+%}
+
+### ===================================================
+### 6. TEST ADMIN ENDPOINT - With Admin Token
+### ===================================================
+### Description: Get admin dashboard
+### Expected: 200 OK (admin user)
+### Logs to check: [UserDetailsService] User authorities: [ROLE_ADMIN]
+###               [SecurityConfig] Authorization successful
+
+GET {{baseUrl}}/api/admin/dashboard
+Authorization: {{auth_header}}
+
+> {%
+    if (response.status === 200) {
+        console.log("✓ Admin access granted!");
+    } else if (response.status === 403) {
+        console.log("✗ Admin access denied - user role may be insufficient");
+    }
+%}
+
+### ===================================================
+### 7. TEST WITH EMPTY AUTH HEADER
+### ===================================================
+### Description: Request with Authorization header but no token
+### Expected: 403 Forbidden
+### Logs to check: [JWT Filter] No Bearer token found
+
+GET {{baseUrl}}/api/bookings/my
+Authorization:
+
+### ===================================================
+### 8. TEST WITH MALFORMED AUTH HEADER
+### ===================================================
+### Description: Request with Authorization but wrong format
+### Expected: 403 Forbidden
+### Logs to check: [JWT Filter] No Bearer token found (header doesn't start with "Bearer ")
+
+GET {{baseUrl}}/api/bookings/my
+Authorization: Basic xyz123
+
+### ===================================================
+### HOW TO USE THIS FILE
+### ===================================================
+
+### 1. Place this file in your project root
+### 2. In IntelliJ IDEA, right-click this file → "Run All Requests in File"
+### 3. Or open this file and press Ctrl+Alt+Shift+R
+### 4. For individual requests, position cursor on the request and press Ctrl+Alt+R
+
+### VIEWING RESULTS:
+### - Check the HTTP Response panel in IntelliJ
+### - For logs, open: logs/cinebook.log
+### - Command to watch logs:
+###   powershell -Command "Get-Content logs/cinebook.log -Wait"
+
+### QUICK COMMANDS:
+### grep "403" logs/cinebook.log                    # Find 403 errors
+### grep "\[JWT" logs/cinebook.log                  # Find JWT logs
+### grep "\[UserDetailsService\]" logs/cinebook.log # Find user lookup logs
+### grep "Successfully authenticated" logs/cinebook.log # Find successful auth
+
+### ===================================================
+### EXPECTED LOG OUTPUTS FOR EACH TEST
+### ===================================================
+
+### Test 2 - Public endpoint:
+### [REQUEST] GET /api/movies from 127.0.0.1
+### [JWT Filter] No Bearer token found for path: /api/movies
+### [RESPONSE] GET /api/movies - Status: 200 (150ms)
+
+### Test 3 - No token (403 error):
+### [REQUEST] GET /api/bookings/my from 127.0.0.1
+### [JWT Filter] No Bearer token found for path: /api/bookings/my
+### [Exception] 403 Forbidden - Path: /api/bookings/my
+### [RESPONSE] GET /api/bookings/my - Status: 403 (5ms)
+
+### Test 4 - Valid token:
+### [REQUEST] GET /api/bookings/my from 127.0.0.1
+### [REQUEST] Authorization: Bearer [TOKEN_PRESENT]
+### [JWT Filter] Successfully authenticated user: admin@example.com
+### [UserDetailsService] User authorities: [ROLE_ADMIN]
+### [RESPONSE] GET /api/bookings/my - Status: 200 (120ms)
+
+### Test 5 - Invalid token:
+### [REQUEST] GET /api/bookings/my from 127.0.0.1
+### [JWT Filter] Bearer token found, extracting username...
+### [JwtService] Error extracting username from token - signature verification failed
+### [JWT Filter] Authentication error for path: /api/bookings/my
+### [Exception] 403 Forbidden - Path: /api/bookings/my
+### [RESPONSE] GET /api/bookings/my - Status: 403 (10ms)
+

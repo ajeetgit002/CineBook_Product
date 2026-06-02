@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/Ajit/CineBook/CineBook" value="3ERWWwdMq4olXTYzQigXppmZiHS" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0000557758566109" />
+      <entry key="MS500" value="1.1482010386951162" />
+      <entry key="S2" value="2.272351072230645" />
+      <entry key="S5" value="4.2345302000302745" />
+      <entry key="S10" value="5.92379105133467" />
+      <entry key="S30" value="7.7551877197524215" />
+      <entry key="S60" value="8.345555316694355" />
+      <entry key="M2" value="8.78467948092543" />
+      <entry key="M5" value="11.536176088311667" />
+      <entry key="M10" value="24.202253107225232" />
+      <entry key="M15" value="44.221956486551164" />
+      <entry key="M30" value="101.24637247371344" />
+      <entry key="H1" value="165.1612123661766" />
+      <entry key="H2" value="214.98185880922767" />
+      <entry key="H4" value="246.59160086042903" />
+      <entry key="D1" value="277.30874034808625" />
+      <entry key="W1" value="283.03212475814473" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="7.490538324222788E-212" />
+      <entry key="S10" value="2.9497523082253065E-106" />
+      <entry key="S30" value="1.2461236875888974E-35" />
+      <entry key="S60" value="7.289494707530046E-18" />
+      <entry key="M2" value="5.915469272028936E-9" />
+      <entry key="M5" value="0.0013461728971656615" />
+      <entry key="M10" value="0.08889842879675833" />
+      <entry key="M15" value="0.39004459066389324" />
+      <entry key="M30" value="1.9487063729169243" />
+      <entry key="H1" value="4.776263534746968" />
+      <entry key="H2" value="7.7555882943037044" />
+      <entry key="H4" value="9.997345231098976" />
+      <entry key="D1" value="12.43528462689326" />
+      <entry key="W1" value="12.917574679874336" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.7846232649549767" />
+      <entry key="MS500" value="1.0907748708686547" />
+      <entry key="S2" value="2.239920979134056" />
+      <entry key="S5" value="4.2071364482664695" />
+      <entry key="S10" value="5.9028252237811625" />
+      <entry key="S30" value="7.745346156303524" />
+      <entry key="S60" value="8.340156566032775" />
+      <entry key="M2" value="8.781817695546804" />
+      <entry key="M5" value="11.536087716424907" />
+      <entry key="M10" value="24.289639197463543" />
+      <entry key="M15" value="44.609705354452956" />
+      <entry key="M30" value="103.19104483703391" />
+      <entry key="H1" value="169.93304117512008" />
+      <entry key="H2" value="222.73400251131906" />
+      <entry key="H4" value="256.58676989158675" />
+      <entry key="D1" value="289.7435808001539" />
+      <entry key="W1" value="295.9496336927282" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3ERWWwdMq4olXTYzQigXppmZiHS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/Ajit/CineBook/CineBook/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propCompiler",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="CineBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="CineBook" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cinebook.CineBookApplication.CineBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="" />
+      <created>1780141903439</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780141903439</updated>
+      <workItem from="1780141905004" duration="6978000" />
+      <workItem from="1780326819871" duration="961000" />
+      <workItem from="1780327849967" duration="3223000" />
+      <workItem from="1780331139032" duration="2145000" />
+      <workItem from="1780333355031" duration="6321000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
