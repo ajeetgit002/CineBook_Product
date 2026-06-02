@@ -1,0 +1,63 @@
+
+        package com.cinebook.service.ServiceImpl;
+
+import com.cinebook.entity.RefreshToken;
+import com.cinebook.entity.User;
+import com.cinebook.repository.RefreshTokenRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class RefreshTokenService {
+
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    public RefreshToken createRefreshToken(User user) {
+
+        RefreshToken refreshToken = RefreshToken.builder()
+                .token(UUID.randomUUID().toString())
+                .user(user)
+                .expiryDate(LocalDateTime.now().plusDays(7))
+                .revoked(false)
+                .build();
+
+        return refreshTokenRepository.save(refreshToken);
+    }
+
+    public RefreshToken validateRefreshToken(String token) {
+
+        RefreshToken refreshToken = refreshTokenRepository
+                .findByToken(token)
+                .orElseThrow(() ->
+                        new RuntimeException("Invalid refresh token"));
+
+        if (Boolean.TRUE.equals(refreshToken.getRevoked())) {
+            throw new RuntimeException("Refresh token revoked");
+        }
+
+        if (refreshToken.getExpiryDate()
+                .isBefore(LocalDateTime.now())) {
+
+            throw new RuntimeException("Refresh token expired");
+        }
+
+        return refreshToken;
+    }
+
+    public void revokeToken(String token) {
+
+        RefreshToken refreshToken = refreshTokenRepository
+                .findByToken(token)
+                .orElseThrow(() ->
+                        new RuntimeException("Invalid refresh token"));
+
+        refreshToken.setRevoked(true);
+
+        refreshTokenRepository.save(refreshToken);
+    }
+}
+

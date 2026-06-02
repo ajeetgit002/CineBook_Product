@@ -36,6 +36,11 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
 
+    private final RefreshTokenService refreshTokenService;
+
+
+
+
 
     @Override
     public RegisterResponse register(RegisterRequest request) {
@@ -76,53 +81,85 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
+
     @Override
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.email())
-                .orElseThrow(() -> new UnauthorizedException("Invalid email or password"));
+                .orElseThrow(() ->
+                        new UnauthorizedException(
+                                "Invalid email or password"));
 
         if (Boolean.FALSE.equals(user.getEnabled())) {
-            throw new ForbiddenException("User account is blocked");
+            throw new ForbiddenException(
+                    "User account is blocked");
         }
 
-        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            throw new UnauthorizedException("Invalid email or password");
+        if (!passwordEncoder.matches(
+                request.password(),
+                user.getPassword())) {
+
+            throw new UnauthorizedException(
+                    "Invalid email or password");
         }
 
-        String token = jwtService.generateToken(user);
+        String accessToken =
+                jwtService.generateToken(user);
+
+        String refreshToken =
+                refreshTokenService
+                        .createRefreshToken(user)
+                        .getToken();
 
         return new AuthResponse(
                 user.getId(),
                 user.getEmail(),
                 user.getRole().getName(),
-                token,
-                token
+                accessToken,
+                refreshToken
         );
     }
 
+
+
     @Override
-    public String logout() {
+    public String logout(String refreshToken) {
+
+        refreshTokenService.revokeToken(refreshToken);
+
         return "Logged out successfully";
     }
+
+
 
     @Override
     public AuthResponse refreshToken(TokenRefreshRequest request) {
 
-        String email = jwtService.extractUsername(request.refreshToken());
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UnauthorizedException("Invalid refresh token"));
+        var refreshToken = refreshTokenService
+                .validateRefreshToken(request.refreshToken());
 
-        String token = jwtService.generateToken(user);
+        User user = refreshToken.getUser();
+
+        String accessToken = jwtService.generateToken(user);
+
+        refreshTokenService.revokeToken(
+                refreshToken.getToken());
+
+        String newRefreshToken =
+                refreshTokenService
+                        .createRefreshToken(user)
+                        .getToken();
 
         return new AuthResponse(
                 user.getId(),
                 user.getEmail(),
                 user.getRole().getName(),
-                token,
-                token
+                accessToken,
+                newRefreshToken
         );
     }
+
+
 
     @Override
     public String forgotPassword(ForgotPasswordRequest request) {

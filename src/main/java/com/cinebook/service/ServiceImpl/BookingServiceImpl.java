@@ -41,60 +41,130 @@ public class BookingServiceImpl implements BookingService {
     private final SeatRepository seatRepository;
     private final CurrentUserService currentUserService;
 
+    private final SeatLockService seatLockService;
+
+
+
+
     @Override
     @Transactional
     public BookingResponse create(BookingRequest request) {
+
         User user = currentUserService.getCurrentUser();
+
         Show show = showRepository.findById(request.showId())
-                .orElseThrow(() -> new ResourceNotFoundException("Show not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Show not found"));
 
         List<Seat> seats = request.seatIds().stream()
                 .map(seatId -> seatRepository.findById(seatId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Seat not found: " + seatId)))
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Seat not found: " + seatId)))
                 .toList();
 
-        for (Seat seat : seats) {
-            boolean booked = bookingSeatRepository.existsBySeatIdAndBookingShowIdAndBookingStatusIn(
-                    seat.getId(),
-                    show.getId(),
-                    List.of(BookingStatus.PENDING, BookingStatus.CONFIRMED, BookingStatus.UPCOMING)
-            );
-            if (booked) {
-                throw new SeatAlreadyBookedException("Seat already booked: " + seat.getSeatNumber());
+        try {
+
+            for (Seat seat : seats) {
+
+                boolean locked =
+                        seatLockService.lockSeat(
+                                show.getId(),
+                                seat.getSeatNumber(),
+                                user.getId()
+                        );
+
+                if (!locked) {
+
+                    throw new SeatAlreadyBookedException(
+                            "Seat temporarily locked: "
+                                    + seat.getSeatNumber());
+                }
+
+                boolean booked =
+                        bookingSeatRepository
+                                .existsBySeatIdAndBookingShowIdAndBookingStatusIn(
+                                        seat.getId(),
+                                        show.getId(),
+                                        List.of(
+                                                BookingStatus.PENDING,
+                                                BookingStatus.CONFIRMED,
+                                                BookingStatus.UPCOMING
+                                        )
+                                );
+
+                if (booked) {
+
+                    throw new SeatAlreadyBookedException(
+                            "Seat already booked: "
+                                    + seat.getSeatNumber());
+                }
             }
+
+            BigDecimal unitPrice =
+                    show.getPrice() == null
+                            ? BigDecimal.ZERO
+                            : show.getPrice();
+
+            BigDecimal total =
+                    unitPrice.multiply(
+                            BigDecimal.valueOf(seats.size()));
+
+            Booking booking = Booking.builder()
+                    .bookingCode(
+                            "CB-" + UUID.randomUUID()
+                                    .toString()
+                                    .substring(0, 8)
+                                    .toUpperCase())
+                    .ticketCount(seats.size())
+                    .totalAmount(total)
+                    .status(BookingStatus.UPCOMING)
+                    .bookingTime(LocalDateTime.now())
+                    .user(user)
+                    .show(show)
+                    .build();
+
+            Booking savedBooking =
+                    bookingRepository.save(booking);
+
+            seats.forEach(seat ->
+                    bookingSeatRepository.save(
+                            BookingSeat.builder()
+                                    .booking(savedBooking)
+                                    .seat(seat)
+                                    .price(unitPrice)
+                                    .build()
+                    )
+            );
+
+            paymentRepository.save(
+                    Payment.builder()
+                            .booking(savedBooking)
+                            .transactionId(
+                                    "PAY-" + UUID.randomUUID()
+                                            .toString()
+                                            .substring(0, 8)
+                                            .toUpperCase())
+                            .amount(total)
+                            .paymentMethod(request.paymentMethod())
+                            .status(PaymentStatus.SUCCESS)
+                            .build()
+            );
+
+            return toResponse(savedBooking);
+
+        } finally {
+
+            seats.forEach(seat ->
+                    seatLockService.unlockSeat(
+                            show.getId(),
+                            seat.getSeatNumber()
+                    )
+            );
         }
-
-        BigDecimal unitPrice = show.getPrice() == null ? BigDecimal.ZERO : show.getPrice();
-        BigDecimal total = unitPrice.multiply(BigDecimal.valueOf(seats.size()));
-
-        Booking booking = Booking.builder()
-                .bookingCode("CB-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
-                .ticketCount(seats.size())
-                .totalAmount(total)
-                .status(BookingStatus.UPCOMING)
-                .bookingTime(LocalDateTime.now())
-                .user(user)
-                .show(show)
-                .build();
-
-        Booking savedBooking = bookingRepository.save(booking);
-
-        seats.forEach(seat -> bookingSeatRepository.save(BookingSeat.builder()
-                .booking(savedBooking)
-                .seat(seat)
-                .price(unitPrice)
-                .build()));
-
-        paymentRepository.save(Payment.builder()
-                .booking(savedBooking)
-                .transactionId("PAY-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
-                .amount(total)
-                .paymentMethod(request.paymentMethod())
-                .status(PaymentStatus.SUCCESS)
-                .build());
-
-        return toResponse(savedBooking);
     }
+
 
     @Override
     public List<BookingResponse> myBookings(BookingStatus status) {

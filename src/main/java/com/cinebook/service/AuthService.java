@@ -14,7 +14,7 @@ public interface AuthService {
 
     AuthResponse login(LoginRequest request);
 
-    String logout();
+    String logout(String refreshToken);
 
     AuthResponse refreshToken(TokenRefreshRequest request);
 

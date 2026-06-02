@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/RefreshTokenRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/entity/RefreshToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/repository/RefreshTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/RateLimitFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/RefreshTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/SeatLockService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,67 +59,72 @@
     "accountId": "6a73a401-34a9-42ca-8347-3949de2d4db4"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/6.2.4/spring-security-config-6.2.4-sources.jar!/org/springframework/security/config/annotation/web/configurers/ExceptionHandlingConfigurer.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/6.2.4/spring-security-config-6.2.4-sources.jar!/org/springframework/security/config/annotation/web/configurers/SessionManagementConfigurer.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/6.1.6/spring-web-6.1.6-sources.jar!/org/springframework/web/filter/CompositeFilter.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000557758566109" />
-      <entry key="MS500" value="1.1482010386951162" />
-      <entry key="S2" value="2.272351072230645" />
-      <entry key="S5" value="4.2345302000302745" />
-      <entry key="S10" value="5.92379105133467" />
-      <entry key="S30" value="7.7551877197524215" />
-      <entry key="S60" value="8.345555316694355" />
-      <entry key="M2" value="8.78467948092543" />
-      <entry key="M5" value="11.536176088311667" />
-      <entry key="M10" value="24.202253107225232" />
-      <entry key="M15" value="44.221956486551164" />
-      <entry key="M30" value="101.24637247371344" />
-      <entry key="H1" value="165.1612123661766" />
-      <entry key="H2" value="214.98185880922767" />
-      <entry key="H4" value="246.59160086042903" />
-      <entry key="D1" value="277.30874034808625" />
-      <entry key="W1" value="283.03212475814473" />
-    </decayedCancelled>
-    <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="7.490538324222788E-212" />
-      <entry key="S10" value="2.9497523082253065E-106" />
-      <entry key="S30" value="1.2461236875888974E-35" />
-      <entry key="S60" value="7.289494707530046E-18" />
-      <entry key="M2" value="5.915469272028936E-9" />
-      <entry key="M5" value="0.0013461728971656615" />
-      <entry key="M10" value="0.08889842879675833" />
-      <entry key="M15" value="0.39004459066389324" />
-      <entry key="M30" value="1.9487063729169243" />
-      <entry key="H1" value="4.776263534746968" />
-      <entry key="H2" value="7.7555882943037044" />
-      <entry key="H4" value="9.997345231098976" />
-      <entry key="D1" value="12.43528462689326" />
-      <entry key="W1" value="12.917574679874336" />
+      <entry key="S5" value="2.9890577711141615E-179" />
+      <entry key="S10" value="1.639849929247922E-89" />
+      <entry key="S30" value="1.1649430268450445E-29" />
+      <entry key="S60" value="1.0777915129228348E-14" />
+      <entry key="M2" value="3.3226371048700805E-7" />
+      <entry key="M5" value="0.012897083593328416" />
+      <entry key="M10" value="0.8082769347271513" />
+      <entry key="M15" value="4.564755577845487" />
+      <entry key="M30" value="32.48461028018135" />
+      <entry key="H1" value="93.65778161928965" />
+      <entry key="H2" value="162.15272811790155" />
+      <entry key="H4" value="214.53066280020442" />
+      <entry key="D1" value="271.73927988349317" />
+      <entry key="W1" value="283.06449688586696" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0000000000000002" />
+      <entry key="M5" value="1.0000013843908717" />
+      <entry key="M10" value="1.0028508412062493" />
+      <entry key="M15" value="1.0393701334981833" />
+      <entry key="M30" value="1.6191169861551837" />
+      <entry key="H1" value="3.692163540735333" />
+      <entry key="H2" value="6.822658575028424" />
+      <entry key="H4" value="9.662394908091674" />
+      <entry key="D1" value="13.14174977320765" />
+      <entry key="W1" value="13.873567558104176" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.7846232649549767" />
-      <entry key="MS500" value="1.0907748708686547" />
-      <entry key="S2" value="2.239920979134056" />
-      <entry key="S5" value="4.2071364482664695" />
-      <entry key="S10" value="5.9028252237811625" />
-      <entry key="S30" value="7.745346156303524" />
-      <entry key="S60" value="8.340156566032775" />
-      <entry key="M2" value="8.781817695546804" />
-      <entry key="M5" value="11.536087716424907" />
-      <entry key="M10" value="24.289639197463543" />
-      <entry key="M15" value="44.609705354452956" />
-      <entry key="M30" value="103.19104483703391" />
-      <entry key="H1" value="169.93304117512008" />
-      <entry key="H2" value="222.73400251131906" />
-      <entry key="H4" value="256.58676989158675" />
-      <entry key="D1" value="289.7435808001539" />
-      <entry key="W1" value="295.9496336927282" />
+      <entry key="MS100" value="2.6924534895130085E-15" />
+      <entry key="MS500" value="0.00121907280166173" />
+      <entry key="S2" value="0.18685615607936729" />
+      <entry key="S5" value="0.5112142653049612" />
+      <entry key="S10" value="0.7149924931808453" />
+      <entry key="S30" value="0.8941982742420912" />
+      <entry key="S60" value="0.9456205762577882" />
+      <entry key="M2" value="0.9724305741132998" />
+      <entry key="M5" value="1.0017715087042498" />
+      <entry key="M10" value="1.8054255626236129" />
+      <entry key="M15" value="5.600009873538091" />
+      <entry key="M30" value="34.100326427934576" />
+      <entry key="H1" value="97.34628598157843" />
+      <entry key="H2" value="168.97218288887555" />
+      <entry key="H4" value="224.1908515177361" />
+      <entry key="D1" value="284.88054068067817" />
+      <entry key="W1" value="296.9379909759562" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -113,6 +132,9 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3ERWWwdMq4olXTYzQigXppmZiHS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -172,7 +194,7 @@
       <workItem from="1780326819871" duration="961000" />
       <workItem from="1780327849967" duration="3223000" />
       <workItem from="1780331139032" duration="2145000" />
-      <workItem from="1780333355031" duration="8862000" />
+      <workItem from="1780333355031" duration="13399000" />
     </task>
     <servers />
   </component>

@@ -2,6 +2,7 @@ package com.cinebook.exceptions;
 
 import com.cinebook.dto.response.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
@@ -130,4 +132,36 @@ public class GlobalExceptionHandler {
                         .path(request.getRequestURI())
                         .build());
     }
+
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiErrorResponse> handleAccessDenied(
+            AccessDeniedException ex,
+            HttpServletRequest request) {
+
+        log.warn("[Exception] 403 Access Denied - Path: {}, Message: {}",
+                request.getRequestURI(),
+                ex.getMessage());
+
+        return error(
+                HttpStatus.FORBIDDEN,
+                "You are not authorized to access this resource",
+                request
+        );
+    }
+
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ApiErrorResponse> handleConstraintViolation(
+            ConstraintViolationException ex,
+            HttpServletRequest request) {
+
+        return error(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                request
+        );
+    }
+
+
 }

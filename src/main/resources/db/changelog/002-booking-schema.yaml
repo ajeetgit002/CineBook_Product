@@ -1,0 +1,273 @@
+
+  databaseChangeLog:
+
+    - changeSet:
+        id: 007-create-shows-table
+        author: ajeet
+
+        changes:
+
+          - createTable:
+              tableName: shows
+
+              columns:
+                - column:
+                    name: id
+                    type: BIGSERIAL
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+
+                - column:
+                    name: movie_id
+                    type: BIGINT
+
+                - column:
+                    name: screen_id
+                    type: BIGINT
+
+                - column:
+                    name: show_date
+                    type: DATE
+
+                - column:
+                    name: start_time
+                    type: TIME
+
+                - column:
+                    name: end_time
+                    type: TIME
+
+                - column:
+                    name: price
+                    type: DECIMAL(10,2)
+
+          - addForeignKeyConstraint:
+              baseTableName: shows
+              baseColumnNames: movie_id
+              referencedTableName: movies
+              referencedColumnNames: id
+              constraintName: fk_shows_movie
+
+          - addForeignKeyConstraint:
+              baseTableName: shows
+              baseColumnNames: screen_id
+              referencedTableName: screens
+              referencedColumnNames: id
+              constraintName: fk_shows_screen
+
+
+    - changeSet:
+        id: 008-create-bookings-table
+        author: ajeet
+
+        changes:
+
+          - createTable:
+              tableName: bookings
+
+              columns:
+                - column:
+                    name: id
+                    type: BIGSERIAL
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+
+                - column:
+                    name: booking_code
+                    type: VARCHAR(50)
+                    constraints:
+                      unique: true
+
+                - column:
+                    name: user_id
+                    type: BIGINT
+
+                - column:
+                    name: show_id
+                    type: BIGINT
+
+                - column:
+                    name: total_amount
+                    type: DECIMAL(10,2)
+
+                - column:
+                    name: status
+                    type: VARCHAR(30)
+
+                - column:
+                    name: created_at
+                    type: TIMESTAMP
+                    defaultValueComputed: CURRENT_TIMESTAMP
+
+          - addForeignKeyConstraint:
+              baseTableName: bookings
+              baseColumnNames: user_id
+              referencedTableName: users
+              referencedColumnNames: id
+              constraintName: fk_bookings_user
+
+          - addForeignKeyConstraint:
+              baseTableName: bookings
+              baseColumnNames: show_id
+              referencedTableName: shows
+              referencedColumnNames: id
+              constraintName: fk_bookings_show
+
+
+    - changeSet:
+        id: 009-create-booking-seats-table
+        author: ajeet
+
+        changes:
+
+          - createTable:
+              tableName: booking_seats
+
+              columns:
+                - column:
+                    name: id
+                    type: BIGSERIAL
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+
+                - column:
+                    name: booking_id
+                    type: BIGINT
+
+                - column:
+                    name: seat_id
+                    type: BIGINT
+
+          - addForeignKeyConstraint:
+              baseTableName: booking_seats
+              baseColumnNames: booking_id
+              referencedTableName: bookings
+              referencedColumnNames: id
+              constraintName: fk_booking_seats_booking
+
+          - addForeignKeyConstraint:
+              baseTableName: booking_seats
+              baseColumnNames: seat_id
+              referencedTableName: seats
+              referencedColumnNames: id
+              constraintName: fk_booking_seats_seat
+
+          - addUniqueConstraint:
+              tableName: booking_seats
+              columnNames: booking_id, seat_id
+              constraintName: uk_booking_seat
+
+
+    - changeSet:
+        id: 010-create-payments-table
+        author: ajeet
+
+        changes:
+
+          - createTable:
+              tableName: payments
+
+              columns:
+                - column:
+                    name: id
+                    type: BIGSERIAL
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+
+                - column:
+                    name: booking_id
+                    type: BIGINT
+
+                - column:
+                    name: transaction_id
+                    type: VARCHAR(255)
+
+                - column:
+                    name: amount
+                    type: DECIMAL(10,2)
+
+                - column:
+                    name: payment_method
+                    type: VARCHAR(50)
+
+                - column:
+                    name: status
+                    type: VARCHAR(30)
+
+                - column:
+                    name: created_at
+                    type: TIMESTAMP
+                    defaultValueComputed: CURRENT_TIMESTAMP
+
+          - addForeignKeyConstraint:
+              baseTableName: payments
+              baseColumnNames: booking_id
+              referencedTableName: bookings
+              referencedColumnNames: id
+              constraintName: fk_payments_booking
+
+
+    - changeSet:
+        id: 011-create-indexes
+        author: ajeet
+
+        changes:
+
+          - createIndex:
+              indexName: idx_users_email
+              tableName: users
+
+              columns:
+                - column:
+                    name: email
+
+          - createIndex:
+              indexName: idx_bookings_user_id
+              tableName: bookings
+
+              columns:
+                - column:
+                    name: user_id
+
+          - createIndex:
+              indexName: idx_shows_movie_id
+              tableName: shows
+
+              columns:
+                - column:
+                    name: movie_id
+
+          - createIndex:
+              indexName: idx_booking_code
+              tableName: bookings
+
+              columns:
+                - column:
+                    name: booking_code
+
+
+    - changeSet:
+        id: 012-seed-roles
+        author: ajeet
+
+        changes:
+
+          - insert:
+              tableName: roles
+
+              columns:
+                - column:
+                    name: name
+                    value: ROLE_USER
+
+          - insert:
+              tableName: roles
+
+              columns:
+                - column:
+                    name: name
+                    value: ROLE_ADMIN

@@ -2,6 +2,7 @@
 
 import com.cinebook.dto.response.ApiErrorResponse;
 import com.cinebook.security.JwtAuthenticationFilter;
+import com.cinebook.security.RateLimitFilter;
 import com.cinebook.security.RequestLoggingFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,9 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
     private final RequestLoggingFilter requestLoggingFilter;
+
+    private final RateLimitFilter rateLimitFilter;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(
@@ -150,8 +154,11 @@ public class SecurityConfig {
                 .addFilterBefore(
                         requestLoggingFilter,
                         JwtAuthenticationFilter.class
-                );
-
+                )
+           .addFilterBefore(
+                rateLimitFilter,
+                JwtAuthenticationFilter.class
+        );
         log.info("[SecurityConfig] Security filter chain configured successfully");
 
         return http.build();
