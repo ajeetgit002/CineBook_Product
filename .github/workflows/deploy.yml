@@ -1,0 +1,44 @@
+
+  name: CineBook CI/CD Pipeline
+
+  on:
+    push:
+      branches:
+        - main
+
+  jobs:
+
+    build-and-deploy:
+
+      runs-on: ubuntu-latest
+
+      steps:
+
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+
+        - name: Set up JDK 21
+          uses: actions/setup-java@v4
+          with:
+            java-version: '21'
+            distribution: 'temurin'
+
+        - name: Cache Maven Dependencies
+          uses: actions/cache@v4
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: |
+              ${{ runner.os }}-m2
+
+        - name: Build Application
+          run: mvn clean package -DskipTests
+
+        - name: Build Docker Image
+          run: docker build -t cinebook .
+
+        - name: Verify Docker Image
+          run: docker images
+
+        - name: CI/CD Success
+          run: echo "CineBook pipeline executed successfully"
