@@ -7,6 +7,7 @@ import com.cinebook.entity.Movie;
 import com.cinebook.entity.Screen;
 import com.cinebook.entity.Show;
 import com.cinebook.enums.BookingStatus;
+import com.cinebook.enums.SeatStatus;
 import com.cinebook.exceptions.ResourceNotFoundException;
 import com.cinebook.repository.BookingSeatRepository;
 import com.cinebook.repository.MovieRepository;
@@ -30,6 +31,7 @@ public class ShowServiceImpl implements ShowService {
     private final ScreenRepository screenRepository;
     private final SeatRepository seatRepository;
     private final BookingSeatRepository bookingSeatRepository;
+    private final SeatLockService seatLockService;
 
     @Override
     public List<ShowResponse> getByMovie(Long movieId) {
@@ -61,9 +63,33 @@ public class ShowServiceImpl implements ShowService {
                 .map(bookingSeat -> bookingSeat.getSeat().getId())
                 .collect(Collectors.toSet());
 
-        return seatRepository.findByScreenId(show.getScreen().getId()).stream()
-                .map(seat -> SeatResponse.from(seat, bookedSeatIds.contains(seat.getId())))
+
+        return seatRepository.findByScreenId(show.getScreen().getId())
+                .stream()
+                .map(seat -> {
+
+                    SeatStatus status = SeatStatus.AVAILABLE;
+
+                    if (bookedSeatIds.contains(seat.getId())) {
+
+                        status = SeatStatus.BOOKED;
+
+                    } else if (
+                            seatLockService.isSeatLocked(
+                                    show.getId(),
+                                    seat.getSeatNumber()
+                            )
+                    ) {
+
+                        status = SeatStatus.LOCKED;
+                    }
+
+                    return SeatResponse.from(seat, status);
+
+                })
                 .toList();
+
+
     }
 
     @Override
