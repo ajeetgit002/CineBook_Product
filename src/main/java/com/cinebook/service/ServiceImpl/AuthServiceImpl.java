@@ -80,46 +80,41 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
+@Override
+public AuthResponse login(LoginRequest request) {
 
-    @Override
-    public AuthResponse login(LoginRequest request) {
+    User user = userRepository.findByEmail(request.email())
+            .orElseThrow(() ->
+                    new UnauthorizedException(
+                            "Invalid email or password"));
 
-        User user = userRepository.findByEmail(request.email())
-                .orElseThrow(() ->
-                        new UnauthorizedException(
-                                "Invalid email or password"));
-
-        if (Boolean.FALSE.equals(user.getEnabled())) {
-            throw new ForbiddenException(
-                    "User account is blocked");
-        }
-
-        if (!passwordEncoder.matches(
-                request.password(),
-                user.getPassword())) {
-
-            throw new UnauthorizedException(
-                    "Invalid email or password");
-        }
-
-        String accessToken =
-                jwtService.generateToken(user);
-
-    refreshTokenService.revokeToken(
-        refreshToken.getToken());
-
-String newRefreshToken =
-        refreshTokenService
-                .createRefreshToken(user)
-                .getToken();
-        return new AuthResponse(
-                user.getId(),
-                user.getEmail(),
-                user.getRole().getName(),
-                accessToken,
-                refreshToken
-        );
+    if (Boolean.FALSE.equals(user.getEnabled())) {
+        throw new ForbiddenException(
+                "User account is blocked");
     }
+
+    if (!passwordEncoder.matches(
+            request.password(),
+            user.getPassword())) {
+
+        throw new UnauthorizedException(
+                "Invalid email or password");
+    }
+
+    String accessToken = jwtService.generateToken(user);
+
+    String refreshToken = refreshTokenService
+            .createRefreshToken(user)
+            .getToken();
+
+    return new AuthResponse(
+            user.getId(),
+            user.getEmail(),
+            user.getRole().getName(),
+            accessToken,
+            refreshToken
+    );
+}
 
 
 
