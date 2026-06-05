@@ -35,7 +35,6 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-
     private final RefreshTokenService refreshTokenService;
 
 
@@ -106,11 +105,13 @@ public class AuthServiceImpl implements AuthService {
         String accessToken =
                 jwtService.generateToken(user);
 
-        String refreshToken =
-                refreshTokenService
-                        .createRefreshToken(user)
-                        .getToken();
+    refreshTokenService.revokeToken(
+        refreshToken.getToken());
 
+String newRefreshToken =
+        refreshTokenService
+                .createRefreshToken(user)
+                .getToken();
         return new AuthResponse(
                 user.getId(),
                 user.getEmail(),
