@@ -22,7 +22,7 @@ public class RefreshToken {
     @Column(unique = true, nullable = false, length = 500)
     private String token;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
