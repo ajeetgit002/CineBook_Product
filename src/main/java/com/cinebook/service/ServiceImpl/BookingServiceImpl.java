@@ -2,6 +2,7 @@ package com.cinebook.service.ServiceImpl;
 
 import com.cinebook.dto.request.BookingRequest;
 import com.cinebook.dto.response.BookingResponse;
+import com.cinebook.dto.response.SeatUpdateEvent;
 import com.cinebook.dto.response.TicketResponse;
 import com.cinebook.entity.Booking;
 import com.cinebook.entity.BookingSeat;
@@ -11,6 +12,7 @@ import com.cinebook.entity.Show;
 import com.cinebook.entity.User;
 import com.cinebook.enums.BookingStatus;
 import com.cinebook.enums.PaymentStatus;
+import com.cinebook.enums.SeatStatus;
 import com.cinebook.exceptions.ForbiddenException;
 import com.cinebook.exceptions.ResourceNotFoundException;
 import com.cinebook.exceptions.SeatAlreadyBookedException;
@@ -22,8 +24,12 @@ import com.cinebook.repository.ShowRepository;
 import com.cinebook.security.CurrentUserService;
 import com.cinebook.service.BookingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -33,7 +39,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class BookingServiceImpl implements BookingService {
-
+    private final SimpMessagingTemplate messagingTemplate;
     private final BookingRepository bookingRepository;
     private final BookingSeatRepository bookingSeatRepository;
     private final PaymentRepository paymentRepository;
@@ -64,7 +70,6 @@ public class BookingServiceImpl implements BookingService {
                                         "Seat not found: " + seatId)))
                 .toList();
 
-        try {
 
             for (Seat seat : seats) {
 
@@ -81,6 +86,17 @@ public class BookingServiceImpl implements BookingService {
                             "Seat temporarily locked: "
                                     + seat.getSeatNumber());
                 }
+                    messagingTemplate.convertAndSend(
+
+                            "/topic/seats/" + show.getId(),
+                            new SeatUpdateEvent(
+                                    show.getId(),
+                                    seat.getSeatNumber(),
+                                    SeatStatus.LOCKED
+                            )
+                    );
+
+
 
                 boolean booked =
                         bookingSeatRepository
@@ -119,7 +135,7 @@ public class BookingServiceImpl implements BookingService {
                                     .toUpperCase())
                     .ticketCount(seats.size())
                     .totalAmount(total)
-                    .status(BookingStatus.UPCOMING)
+                    .status(BookingStatus.PENDING)
                     .bookingTime(LocalDateTime.now())
                     .user(user)
                     .show(show)
@@ -148,21 +164,15 @@ public class BookingServiceImpl implements BookingService {
                                             .toUpperCase())
                             .amount(total)
                             .paymentMethod(request.paymentMethod())
-                            .status(PaymentStatus.SUCCESS)
-                            .build()
+
+                                    .status(PaymentStatus.PENDING)
+
+                    .build()
             );
 
             return toResponse(savedBooking);
 
-        } finally {
 
-            seats.forEach(seat ->
-                    seatLockService.unlockSeat(
-                            show.getId(),
-                            seat.getSeatNumber()
-                    )
-            );
-        }
     }
 
 
@@ -221,4 +231,63 @@ public class BookingServiceImpl implements BookingService {
 
         return BookingResponse.from(booking, seatNumbers);
     }
+
+    @Override
+    @Transactional
+    public void confirmBooking(Long bookingId) {
+
+        Booking booking =
+                bookingRepository.findById(bookingId)
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Booking not found"
+                                ));
+
+        booking.setStatus(
+                BookingStatus.CONFIRMED
+        );
+
+        bookingRepository.save(booking);
+
+        Payment payment =
+                paymentRepository.findByBookingId(
+                        bookingId
+                ).orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Payment not found"
+                        ));
+
+        payment.setStatus(
+                PaymentStatus.SUCCESS
+        );
+
+        paymentRepository.save(payment);
+
+        List<BookingSeat> bookingSeats =
+                bookingSeatRepository.findByBookingId(
+                        bookingId
+                );
+
+        bookingSeats.forEach(bookingSeat -> {
+
+            seatLockService.unlockSeat(
+                    booking.getShow().getId(),
+                    bookingSeat.getSeat().getSeatNumber()
+            );
+
+            messagingTemplate.convertAndSend(
+
+                    "/topic/seats/"
+                            + booking.getShow().getId(),
+
+                    new SeatUpdateEvent(
+                            booking.getShow().getId(),
+                            bookingSeat.getSeat().getSeatNumber(),
+                            SeatStatus.BOOKED
+                    )
+            );
+        });
+    }
+
+
 }

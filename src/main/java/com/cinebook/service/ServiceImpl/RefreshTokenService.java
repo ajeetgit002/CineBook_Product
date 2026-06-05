@@ -6,27 +6,56 @@ import com.cinebook.entity.User;
 import com.cinebook.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RefreshTokenService {
 
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public RefreshToken createRefreshToken(User user) {
 
-        RefreshToken refreshToken = RefreshToken.builder()
-                .token(UUID.randomUUID().toString())
-                .user(user)
-                .expiryDate(LocalDateTime.now().plusDays(7))
-                .revoked(false)
-                .build();
+    public RefreshToken createRefreshToken(User user) {
+        Optional<RefreshToken> existingToken =
+                refreshTokenRepository.findAllByUser(user)
+                        .stream()
+                        .findFirst();
+
+        if (existingToken.isPresent()) {
+
+            RefreshToken token =
+                    existingToken.get();
+
+            token.setToken(
+                    UUID.randomUUID().toString()
+            );
+
+            token.setExpiryDate(
+                    LocalDateTime.now().plusDays(7)
+            );
+
+            token.setRevoked(false);
+
+            return refreshTokenRepository.save(token);
+        }
+
+        RefreshToken refreshToken =
+                RefreshToken.builder()
+                        .token(UUID.randomUUID().toString())
+                        .user(user)
+                        .expiryDate(
+                                LocalDateTime.now().plusDays(7)
+                        )
+                        .revoked(false)
+                        .build();
 
         return refreshTokenRepository.save(refreshToken);
     }
+
 
     public RefreshToken validateRefreshToken(String token) {
 

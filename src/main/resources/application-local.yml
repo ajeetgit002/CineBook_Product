@@ -30,3 +30,9 @@
       com.cinebook: DEBUG
       org.springframework.security: DEBUG
 
+
+
+  razorpay:
+    key-id: rzp_test_Sy0YMIZpS1vfsk
+    key-secret: SYrXMJyK52NsWP4gJI8mtfc4
+

@@ -19,4 +19,8 @@ public interface BookingService {
     TicketResponse ticket(Long bookingId);
 
     List<BookingResponse> history();
+
+    void confirmBooking(Long bookingId);
+
+
 }

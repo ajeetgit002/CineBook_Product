@@ -2,8 +2,7 @@
 ### Use this file with IntelliJ IDEA's built-in REST Client (Ctrl+Alt+Shift+R)
 
 @baseUrl = http://localhost:9099
-@adminEmail = admin@example.com
-@adminPassword = admin123
+
 
 ### ===================================================
 ### 1. LOGIN - Get Authentication Token
