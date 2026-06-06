@@ -3,6 +3,7 @@ package com.cinebook.controller;
 import com.cinebook.dto.request.*;
 import com.cinebook.dto.response.ApiResponse;
 import com.cinebook.dto.response.AuthResponse;
+import com.cinebook.dto.response.OtpResponse;
 import com.cinebook.dto.response.RegisterResponse;
 import com.cinebook.service.AuthService;
 import jakarta.validation.Valid;
@@ -17,8 +18,8 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ApiResponse<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) {
-        return ApiResponse.success("User registered successfully", authService.register(request));
+    public ApiResponse<OtpResponse> register(@Valid @RequestBody RegisterRequest request) {
+        return ApiResponse.success("OTP sent successfully", authService.register(request));
     }
 
     @PostMapping("/login")
@@ -54,7 +55,31 @@ public class AuthController {
     }
 
     @PostMapping("/verify-otp")
-    public ApiResponse<String> verifyOtp(@Valid @RequestBody VerifyOtpRequest request) {
-        return ApiResponse.success("OTP verified successfully", authService.verifyOtp(request));
+    public ApiResponse<String> verifyOtp(
+            @RequestBody VerifyOtpRequest request
+    ) {
+
+        authService.verifyOtp(request);
+
+        return ApiResponse.success(
+                "OTP verified successfully",
+                null
+        );
+    }
+
+
+    @PostMapping("/resend-otp")
+    public ApiResponse<String> resendOtp(
+            @Valid
+            @RequestBody
+            ResendOtpRequest request
+    ) {
+
+        authService.resendOtp(request);
+
+        return ApiResponse.success(
+                "OTP resent successfully",
+                null
+        );
     }
 }

@@ -4,10 +4,15 @@ import com.cinebook.dto.request.BookingRequest;
 import com.cinebook.dto.response.ApiResponse;
 import com.cinebook.dto.response.BookingResponse;
 import com.cinebook.dto.response.TicketResponse;
+
 import com.cinebook.enums.BookingStatus;
 import com.cinebook.service.BookingService;
+import org.springframework.core.io.Resource;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,4 +58,26 @@ public class BookingController {
     public ApiResponse<TicketResponse> ticket(@PathVariable Long bookingId) {
         return ApiResponse.success("Ticket fetched successfully", bookingService.ticket(bookingId));
     }
+
+    @GetMapping("/{bookingId}/download-ticket")
+    public ResponseEntity<Resource> downloadTicket(
+            @PathVariable Long bookingId
+    ) {
+
+        Resource resource =
+                bookingService.downloadTicket(
+                        bookingId
+                );
+
+        return ResponseEntity.ok()
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=ticket.png"
+                )
+                .contentType(
+                        MediaType.IMAGE_PNG
+                )
+                .body(resource);
+    }
+
 }

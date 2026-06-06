@@ -1,4 +1,8 @@
 package com.cinebook.dto.response;
 
-public class OtpResponse {
+
+public record OtpResponse(
+        String email,
+        String expiresIn
+) {
 }

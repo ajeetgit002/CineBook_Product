@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-261.24374.151">
+    <data-source name="cinebook_db@localhost" uuid="cc19ff78-9cec-441c-9470-62657292ccab">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>root</user-name>
+      <schema-mapping />
+    </data-source>
+    <data-source name="0@localhost" uuid="26c76556-0397-4263-b30d-0e8baf755d2a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="REDIS" />
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

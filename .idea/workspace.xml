@@ -5,27 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RazorpayConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/CreateOrderRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/VerifyPaymentRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/response/CreateOrderResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/response/SeatUpdateEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/TokenRefreshException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/PaymentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/QrCodeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/TicketGeneratorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/ticket-template.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_COVERAGE_ANALYSIS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMPLETION_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/INDEX.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LOGGING_AND_DEBUGGING_GUIDE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LOGGING_IMPLEMENTATION_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LOG_FLOW_DIAGRAMS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QUICK_DEBUG_GUIDE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_LOGGING_SETUP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/START_HERE_ACTION_ITEMS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VERIFICATION_REPORT.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/cinebook.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/cinebook.log.2026-06-01.0.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/repository/BookingSeatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/repository/BookingSeatRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/repository/RefreshTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/repository/RefreshTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/config/OtpGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/OtpGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/PendingRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/PendingRegistration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/ResendOtpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/ResendOtpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/response/OtpResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/response/OtpResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/entity/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/MaxResendLimitException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/MaxResendLimitException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/BookingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/RefreshTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/EmailServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_apis.http" beforeDir="false" afterPath="$PROJECT_DIR$/test_apis.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/startup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_apis.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_apis.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_apis.sh" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +58,9 @@
       <entry key="_C:/Users/Ajit/CineBook/CineBook" value="3ERWWwdMq4olXTYzQigXppmZiHS" />
     </persistenceIdMap>
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="197" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -52,84 +73,88 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ajeetgit002"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ajeetgit002&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ajeetgit002/CineBook_Product.git",
-    "accountId": "6a73a401-34a9-42ca-8347-3949de2d4db4"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ajeetgit002/CineBook_Product.git&quot;,
+    &quot;accountId&quot;: &quot;6a73a401-34a9-42ca-8347-3949de2d4db4&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/6.2.4/spring-security-config-6.2.4-sources.jar!/org/springframework/security/config/annotation/web/configurers/ExceptionHandlingConfigurer.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/6.2.4/spring-security-config-6.2.4-sources.jar!/org/springframework/security/config/annotation/web/configurers/SessionManagementConfigurer.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/6.1.6/spring-web-6.1.6-sources.jar!/org/springframework/web/filter/CompositeFilter.java" root0="SKIP_INSPECTION" />
   </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="2.9890577711141615E-179" />
-      <entry key="S10" value="1.639849929247922E-89" />
-      <entry key="S30" value="1.1649430268450445E-29" />
-      <entry key="S60" value="1.0777915129228348E-14" />
-      <entry key="M2" value="3.3226371048700805E-7" />
-      <entry key="M5" value="0.012897083593328416" />
-      <entry key="M10" value="0.8082769347271513" />
-      <entry key="M15" value="4.564755577845487" />
-      <entry key="M30" value="32.48461028018135" />
-      <entry key="H1" value="93.65778161928965" />
-      <entry key="H2" value="162.15272811790155" />
-      <entry key="H4" value="214.53066280020442" />
-      <entry key="D1" value="271.73927988349317" />
-      <entry key="W1" value="283.06449688586696" />
-    </decayedCancelled>
-    <decayedSelected>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
       <entry key="S2" value="1.0" />
       <entry key="S5" value="1.0" />
       <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0000000000000002" />
-      <entry key="M5" value="1.0000013843908717" />
-      <entry key="M10" value="1.0028508412062493" />
-      <entry key="M15" value="1.0393701334981833" />
-      <entry key="M30" value="1.6191169861551837" />
-      <entry key="H1" value="3.692163540735333" />
-      <entry key="H2" value="6.822658575028424" />
-      <entry key="H4" value="9.662394908091674" />
-      <entry key="D1" value="13.14174977320765" />
-      <entry key="W1" value="13.873567558104176" />
+      <entry key="S30" value="1.0000000654484076" />
+      <entry key="S60" value="1.0002558288640238" />
+      <entry key="M2" value="1.0159946511066595" />
+      <entry key="M5" value="1.1912449202547892" />
+      <entry key="M10" value="1.437315629301433" />
+      <entry key="M15" value="1.5761646969440646" />
+      <entry key="M30" value="1.797733912820704" />
+      <entry key="H1" value="4.915969270733024" />
+      <entry key="H2" value="31.24778148282467" />
+      <entry key="H4" value="94.13725227518808" />
+      <entry key="D1" value="242.81853733997653" />
+      <entry key="W1" value="286.0675807370668" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="2.1719958915504286E-155" />
+      <entry key="S60" value="4.660467671329192E-78" />
+      <entry key="M2" value="2.158811802640443E-39" />
+      <entry key="M5" value="3.4222279977923107E-16" />
+      <entry key="M10" value="1.9188426092350305E-8" />
+      <entry key="M15" value="7.811111665854965E-6" />
+      <entry key="M30" value="0.004082033148411654" />
+      <entry key="H1" value="0.16145028568043548" />
+      <entry key="H2" value="1.404550529544197" />
+      <entry key="H4" value="4.490789286121542" />
+      <entry key="D1" value="12.235866793845842" />
+      <entry key="W1" value="14.568945763740734" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.6924534895130085E-15" />
-      <entry key="MS500" value="0.00121907280166173" />
-      <entry key="S2" value="0.18685615607936729" />
-      <entry key="S5" value="0.5112142653049612" />
-      <entry key="S10" value="0.7149924931808453" />
-      <entry key="S30" value="0.8941982742420912" />
-      <entry key="S60" value="0.9456205762577882" />
-      <entry key="M2" value="0.9724305741132998" />
-      <entry key="M5" value="1.0017715087042498" />
-      <entry key="M10" value="1.8054255626236129" />
-      <entry key="M15" value="5.600009873538091" />
-      <entry key="M30" value="34.100326427934576" />
-      <entry key="H1" value="97.34628598157843" />
-      <entry key="H2" value="168.97218288887555" />
-      <entry key="H4" value="224.1908515177361" />
-      <entry key="D1" value="284.88054068067817" />
-      <entry key="W1" value="296.9379909759562" />
+      <entry key="MS100" value="0.0018350053695586157" />
+      <entry key="MS500" value="0.2836138712339885" />
+      <entry key="S2" value="0.729763044896567" />
+      <entry key="S5" value="0.881602365474992" />
+      <entry key="S10" value="0.9389368272013789" />
+      <entry key="S30" value="0.9792167158591653" />
+      <entry key="S60" value="0.9898024086627963" />
+      <entry key="M2" value="1.010531605817402" />
+      <entry key="M5" value="1.188060336185741" />
+      <entry key="M10" value="1.4350220146388795" />
+      <entry key="M15" value="1.574379469708121" />
+      <entry key="M30" value="1.8007382637833043" />
+      <entry key="H1" value="5.076669160852555" />
+      <entry key="H2" value="32.65133455185173" />
+      <entry key="H4" value="98.62681228349464" />
+      <entry key="D1" value="255.0539035562376" />
+      <entry key="W1" value="300.63644244890327" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -147,32 +172,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/Ajit/CineBook/CineBook/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ajit/CineBook/CineBook/src/main/resources/assets&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Ajit/CineBook/CineBook/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ajit\CineBook\CineBook\src\main\resources\assets" />
+      <recent name="C:\Users\Ajit\CineBook\CineBook\src\main\java\com\cinebook\doc" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ajit\CineBook\CineBook\src\main\resources\assets" />
+      <recent name="C:\Users\Ajit\CineBook\CineBook\src\main\resources\static\images" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="CineBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -203,11 +240,35 @@
       <workItem from="1780327849967" duration="3223000" />
       <workItem from="1780331139032" duration="2145000" />
       <workItem from="1780333355031" duration="20454000" />
+      <workItem from="1780716151260" duration="125000" />
+      <workItem from="1780716544753" duration="52000" />
+      <workItem from="1780716906435" duration="16184000" />
+      <workItem from="1780745559968" duration="2026000" />
+      <workItem from="1780749294985" duration="210000" />
+      <workItem from="1780749539753" duration="333000" />
+      <workItem from="1780749926545" duration="559000" />
+      <workItem from="1780750523128" duration="5049000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.security:spring-security-core" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:io.projectreactor:reactor-core" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-websocket" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-messaging" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

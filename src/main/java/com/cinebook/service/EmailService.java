@@ -1,4 +1,15 @@
 package com.cinebook.service;
 
-public class EmailService {
+import com.cinebook.entity.Booking;
+
+public interface EmailService {
+
+    void sendOtpEmail(
+            String email,
+            String otp
+    );
+
+    void sendTicketEmail(
+            Booking booking
+    );
 }

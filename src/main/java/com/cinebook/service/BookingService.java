@@ -4,6 +4,7 @@ import com.cinebook.dto.request.BookingRequest;
 import com.cinebook.dto.response.BookingResponse;
 import com.cinebook.dto.response.TicketResponse;
 import com.cinebook.enums.BookingStatus;
+import org.springframework.core.io.Resource;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public interface BookingService {
     List<BookingResponse> history();
 
     void confirmBooking(Long bookingId);
+    Resource downloadTicket(Long bookingId);
 
 
 }

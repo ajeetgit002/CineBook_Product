@@ -38,4 +38,11 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "show_id")
     private Show show;
+
+
+    @Column(name = "qr_code_path")
+    private String qrCodePath;
+
+    @Column(name = "ticket_path")
+    private String ticketPath;
 }

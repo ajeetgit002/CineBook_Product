@@ -1,29 +1,28 @@
 package com.cinebook.service.ServiceImpl;
 
 
-import com.cinebook.dto.request.ForgotPasswordRequest;
-import com.cinebook.dto.request.LoginRequest;
-import com.cinebook.dto.request.RegisterRequest;
-import com.cinebook.dto.request.ResetPasswordRequest;
-import com.cinebook.dto.request.TokenRefreshRequest;
-import com.cinebook.dto.request.VerifyOtpRequest;
+import com.cinebook.config.OtpGenerator;
+import com.cinebook.dto.request.*;
 import com.cinebook.dto.response.AuthResponse;
+import com.cinebook.dto.response.OtpResponse;
 import com.cinebook.dto.response.RegisterResponse;
 import com.cinebook.entity.Role;
 import com.cinebook.entity.User;
-import com.cinebook.exceptions.DuplicateResourceException;
-import com.cinebook.exceptions.ForbiddenException;
-import com.cinebook.exceptions.ResourceNotFoundException;
-import com.cinebook.exceptions.UnauthorizedException;
+import com.cinebook.exceptions.*;
 import com.cinebook.repository.RoleRepository;
 import com.cinebook.repository.UserRepository;
 import com.cinebook.security.JwtService;
 import com.cinebook.service.AuthService;
+import com.cinebook.service.EmailService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -37,47 +36,78 @@ public class AuthServiceImpl implements AuthService {
 
     private final RefreshTokenService refreshTokenService;
 
+    private final StringRedisTemplate redisTemplate;
+    private final EmailService emailService;
+    private final OtpGenerator otpGenerator;
 
+    private final ObjectMapper objectMapper;
 
 
 
     @Override
-    public RegisterResponse register(RegisterRequest request) {
+    @Transactional
+    public OtpResponse register(
+            RegisterRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByEmail(
+                request.getEmail())) {
+
             throw new DuplicateResourceException(
                     "Email already registered");
         }
 
-        if (request.getPhone() != null
-                && userRepository.existsByPhone(request.getPhone())) {
-            throw new DuplicateResourceException(
-                    "Phone already registered");
+        String otp =
+                otpGenerator.generateOtp();
+
+        PendingRegistration pending =
+                PendingRegistration.builder()
+                        .firstName(
+                                request.getFirstName())
+                        .lastName(
+                                request.getLastName())
+                        .email(
+                                request.getEmail())
+                        .phone(
+                                request.getPhone())
+                        .password(
+                                request.getPassword())
+                        .build();
+
+        try {
+
+            String json =
+                    objectMapper.writeValueAsString(
+                            pending);
+
+            redisTemplate.opsForValue().set(
+                    "register:" + request.getEmail(),
+                    json,
+                    Duration.ofMinutes(5)
+            );
+
+            redisTemplate.opsForValue().set(
+                    "otp:" + request.getEmail(),
+                    otp,
+                    Duration.ofMinutes(5)
+            );
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(
+                    "Failed to store registration data",
+                    e
+            );
         }
 
-        Role userRole = roleRepository.findByName("ROLE_USER")
-                .orElseGet(() -> roleRepository.save(
-                        Role.builder().name("ROLE_USER").build()));
+        emailService.sendOtpEmail(
+                request.getEmail(),
+                otp
+        );
 
-        User user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .phone(request.getPhone())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(userRole)
-                .enabled(true)
-                .rewardPoints(0)
-                .build();
-
-        User savedUser = userRepository.save(user);
-
-        return RegisterResponse.builder()
-                .userId(savedUser.getId())
-                .firstName(savedUser.getFirstName())
-                .email(savedUser.getEmail())
-                .role(savedUser.getRole().getName())
-                .build();
+        return new OtpResponse(
+                request.getEmail(),
+                "5 minutes"
+        );
     }
 
 @Override
@@ -158,9 +188,33 @@ public AuthResponse login(LoginRequest request) {
 
 
     @Override
-    public String forgotPassword(ForgotPasswordRequest request) {
-        userRepository.findByEmail(request.email())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    @Transactional
+    public String forgotPassword(
+            ForgotPasswordRequest request) {
+
+        User user =
+                userRepository.findByEmail(
+                        request.email()
+                ).orElseThrow(
+                        () -> new ResourceNotFoundException(
+                                "User not found"
+                        )
+                );
+
+        String otp =
+                otpGenerator.generateOtp();
+
+        redisTemplate.opsForValue().set(
+                "forgot-otp:" + user.getEmail(),
+                otp,
+                Duration.ofMinutes(5)
+        );
+
+        emailService.sendOtpEmail(
+                user.getEmail(),
+                otp
+        );
+
         return "Password reset OTP sent successfully";
     }
 
@@ -173,10 +227,134 @@ public AuthResponse login(LoginRequest request) {
         return "Password reset successfully";
     }
 
+
+
+
+
+
+
     @Override
-    public String verifyOtp(VerifyOtpRequest request) {
-        userRepository.findByEmail(request.email())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        return "OTP verified successfully";
+    @Transactional
+    public void verifyOtp(
+            VerifyOtpRequest request) {
+
+        String storedOtp =
+                redisTemplate.opsForValue()
+                        .get("otp:" + request.email());
+
+        if (storedOtp == null) {
+            throw new RuntimeException("OTP expired");
+        }
+
+        if (!storedOtp.equals(request.otp())) {
+            throw new RuntimeException("Invalid OTP");
+        }
+
+        String registrationJson =
+                redisTemplate.opsForValue()
+                        .get("register:" + request.email());
+
+        PendingRegistration registration;
+
+        try {
+
+            registration =
+                    objectMapper.readValue(
+                            registrationJson,
+                            PendingRegistration.class
+                    );
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(
+                    "Failed to read registration data",
+                    e
+            );
+        }
+
+        Role userRole =
+                roleRepository.findByName("ROLE_USER")
+                        .orElseThrow();
+
+        User user = User.builder()
+                .firstName(registration.getFirstName())
+                .lastName(registration.getLastName())
+                .email(registration.getEmail())
+                .phone(registration.getPhone())
+                .password(
+                        passwordEncoder.encode(
+                                registration.getPassword()
+                        )
+                )
+                .enabled(true)
+                .rewardPoints(0)
+                .role(userRole)
+                .build();
+
+        userRepository.save(user);
+
+        redisTemplate.delete(
+                "otp:" + request.email()
+        );
+
+        redisTemplate.delete(
+                "register:" + request.email()
+        );
     }
+
+
+
+
+    @Transactional
+    public void resendOtp(
+            ResendOtpRequest request) {
+
+        String key =
+                "otp_resend:email:"
+                        + request.getEmail();
+
+        String countValue =
+                redisTemplate.opsForValue()
+                        .get(key);
+
+        Integer count =
+                countValue == null
+                        ? 0
+                        : Integer.parseInt(countValue);
+
+        count = count == null
+                ? 0
+                : count;
+
+        if(count >= 3) {
+
+            throw new MaxResendLimitException();
+        }
+
+        String otp =
+                otpGenerator.generateOtp();
+
+        redisTemplate.opsForValue().set(
+                "otp:email:"
+                        + request.getEmail(),
+                otp,
+                Duration.ofMinutes(5)
+        );
+
+        redisTemplate.opsForValue().increment(
+                key
+        );
+
+        redisTemplate.expire(
+                key,
+                Duration.ofMinutes(5)
+        );
+
+        emailService.sendOtpEmail(
+                request.getEmail(),
+                otp
+        );
+    }
+
+
 }

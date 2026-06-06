@@ -23,7 +23,10 @@ import com.cinebook.repository.SeatRepository;
 import com.cinebook.repository.ShowRepository;
 import com.cinebook.security.CurrentUserService;
 import com.cinebook.service.BookingService;
+import com.cinebook.service.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,9 +51,9 @@ public class BookingServiceImpl implements BookingService {
     private final CurrentUserService currentUserService;
 
     private final SeatLockService seatLockService;
-
-
-
+    private final TicketGeneratorService ticketGeneratorService;
+    private final QrCodeService qrCodeService;
+    private final EmailService emailService;
 
     @Override
     @Transactional
@@ -262,7 +265,54 @@ public class BookingServiceImpl implements BookingService {
         );
 
         paymentRepository.save(payment);
+        try {
 
+            String qrPath =
+                    qrCodeService.generateQrCode(
+                            booking.getBookingCode()
+                    );
+
+            booking.setQrCodePath(
+                    qrPath
+            );
+
+            bookingRepository.save(
+                    booking
+            );
+
+            String ticketPath =
+                    ticketGeneratorService.generateTicket(
+                            booking
+                    );
+
+            booking.setTicketPath(
+                    ticketPath
+            );
+
+            bookingRepository.save(
+                    booking
+            );
+
+
+            System.out.println(
+                    "QR Path = "
+                            + booking.getQrCodePath()
+            );
+
+            System.out.println(
+                    "Ticket Path = "
+                            + booking.getTicketPath()
+            );
+            emailService.sendTicketEmail(
+                    booking
+            );
+        } catch (Exception e) {
+
+            throw new RuntimeException(
+                    "Failed to generate QR Code",
+                    e
+            );
+        }
         List<BookingSeat> bookingSeats =
                 bookingSeatRepository.findByBookingId(
                         bookingId
@@ -288,6 +338,22 @@ public class BookingServiceImpl implements BookingService {
             );
         });
     }
+    @Override
+    public Resource downloadTicket(
+            Long bookingId
+    ) {
 
+        Booking booking =
+                bookingRepository.findById(
+                        bookingId
+                ).orElseThrow(
+                        () -> new ResourceNotFoundException(
+                                "Booking not found"
+                        )
+                );
 
+        return new FileSystemResource(
+                booking.getTicketPath()
+        );
+    }
 }
