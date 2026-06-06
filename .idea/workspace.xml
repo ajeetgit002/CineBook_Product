@@ -5,45 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/QrCodeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/TicketGeneratorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/ticket-template.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_COVERAGE_ANALYSIS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMPLETION_SUMMARY.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/INDEX.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LOGGING_AND_DEBUGGING_GUIDE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LOGGING_IMPLEMENTATION_SUMMARY.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LOG_FLOW_DIAGRAMS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QUICK_DEBUG_GUIDE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README_LOGGING_SETUP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/START_HERE_ACTION_ITEMS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VERIFICATION_REPORT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/cinebook.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/cinebook.log.2026-06-01.0.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/config/OtpGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/OtpGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/PendingRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/PendingRegistration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/ResendOtpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/request/ResendOtpRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/response/OtpResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/dto/response/OtpResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/entity/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/MaxResendLimitException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/exceptions/MaxResendLimitException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/BookingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/BookingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/EmailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/startup.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_apis.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_apis.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_apis.sh" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +210,7 @@
       <workItem from="1780749294985" duration="210000" />
       <workItem from="1780749539753" duration="333000" />
       <workItem from="1780749926545" duration="559000" />
-      <workItem from="1780750523128" duration="5049000" />
+      <workItem from="1780750523128" duration="6322000" />
     </task>
     <servers />
   </component>
