@@ -19,11 +19,6 @@
 
       open-in-view: false
 
-    data:
-      redis:
-        host: ${REDIS_HOST}
-        port: ${REDIS_PORT:6379}
-
 spring:
     mail:
       host: smtp.gmail.com
@@ -37,6 +32,14 @@ spring:
             auth: true
             starttls:
               enable: true
+
+
+    data:
+      redis:
+        host: ${REDIS_HOST}
+        port: ${REDIS_PORT:6379}
+
+
 logging:
     level:
       root: INFO
