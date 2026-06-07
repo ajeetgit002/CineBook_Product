@@ -60,17 +60,17 @@ public class TicketGeneratorService {
 
             g.drawImage(
                     poster,
-                    130,
-                    370,
-                    270,
-                    330,
+                    165,
+                    375,
+                    240,
+                    335,
                     null
             );
         }
 
 // Movie Title
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 44));
+        g.setFont(new Font("Arial", Font.BOLD, 30));
 
         g.drawString(
                 booking.getShow()
