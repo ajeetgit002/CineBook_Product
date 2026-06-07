@@ -9,28 +9,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
     show-sql: false
-
+    open-in-view: false
     properties:
       hibernate:
         format_sql: false
-
-    open-in-view: false
-
-  mail:
-    host: smtp.gmail.com
-    port: 465
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
-
-    properties:
-      mail:
-        debug: true
-        smtp:
-          auth: true
-          starttls:
-            enable: true
 
   data:
     redis:
@@ -46,3 +29,8 @@ logging:
 razorpay:
   key-id: ${RAZORPAY_KEY_ID}
   key-secret: ${RAZORPAY_KEY_SECRET}
+
+brevo:
+  api-key: ${BREVO_API_KEY}
+  sender-email: ${BREVO_SENDER_EMAIL}
+  sender-name: CineBook
