@@ -27,3 +27,4 @@
 
     level:
       com.zaxxer.hikari: DEBUG
+
