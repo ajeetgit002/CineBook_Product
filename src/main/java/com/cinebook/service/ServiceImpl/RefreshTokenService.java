@@ -21,7 +21,7 @@ public class RefreshTokenService {
 
     public RefreshToken createRefreshToken(User user) {
         Optional<RefreshToken> existingToken =
-                refreshTokenRepository.findAllByUser(user)
+                refreshTokenRepository.findByUser(user)
                         .stream()
                         .findFirst();
 

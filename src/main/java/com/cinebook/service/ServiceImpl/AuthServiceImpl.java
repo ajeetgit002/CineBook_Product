@@ -229,10 +229,6 @@ public AuthResponse login(LoginRequest request) {
 
 
 
-
-
-
-
     @Override
     @Transactional
     public void verifyOtp(

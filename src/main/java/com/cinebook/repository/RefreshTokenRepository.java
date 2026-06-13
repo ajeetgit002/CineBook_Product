@@ -16,5 +16,5 @@ public interface RefreshTokenRepository
     List<RefreshToken> findAllByUser(User user);
     @Modifying
     void deleteByUser(User user);
-
+    Optional<RefreshToken> findByUser(User user);
 }
