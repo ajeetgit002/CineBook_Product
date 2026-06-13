@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="610c4e30-5638-4545-a003-744627cb5565" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/TicketGeneratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/service/ServiceImpl/TicketGeneratorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tickets/CB-8D1C1128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/security/RateLimitFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/RateLimitFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinebook/security/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +211,7 @@
       <workItem from="1780749294985" duration="210000" />
       <workItem from="1780749539753" duration="333000" />
       <workItem from="1780749926545" duration="559000" />
-      <workItem from="1780750523128" duration="17424000" />
+      <workItem from="1780750523128" duration="20725000" />
     </task>
     <servers />
   </component>

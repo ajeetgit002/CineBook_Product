@@ -17,7 +17,7 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
+//@Component
 public class RateLimitFilter extends OncePerRequestFilter {
 
     private final Cache<String, Bucket> cache = Caffeine.newBuilder()

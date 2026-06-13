@@ -31,7 +31,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtFilter;
     private final RequestLoggingFilter requestLoggingFilter;
 
-    private final RateLimitFilter rateLimitFilter;
+    //private final RateLimitFilter rateLimitFilter;
 
 
     @Bean
@@ -155,11 +155,11 @@ public class SecurityConfig {
                 .addFilterBefore(
                         requestLoggingFilter,
                         JwtAuthenticationFilter.class
-                )
-           .addFilterBefore(
-                rateLimitFilter,
-                JwtAuthenticationFilter.class
-        );
+                );
+//           .addFilterBefore(
+//                rateLimitFilter,
+//                JwtAuthenticationFilter.class
+//        );
         log.info("[SecurityConfig] Security filter chain configured successfully");
 
         return http.build();
