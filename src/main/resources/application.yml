@@ -2,6 +2,11 @@
   server:
     port: ${PORT:9099}
 
+    tomcat:
+        threads:
+          max: 200
+          min-spare: 20
+
   spring:
     application:
       name: cinebook
